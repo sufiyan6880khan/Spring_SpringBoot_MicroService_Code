@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: BOOTIOCproject07-BulkInjection-ConfigurationProperties
+com:
+  sk:
+    id: 2002
+    cname: Lenovo
+    pincode: 220220
+    size: 100
+    branch: hyd
+    phoneno: 9090909090
+    addr:
+    - hyd
+    - pune
+    - delhi
+    pincodes:
+    - 300909
+    - 400909
+    - 200909
+    cnames: dell,apple,Lenovo
