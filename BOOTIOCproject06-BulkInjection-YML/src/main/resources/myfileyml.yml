@@ -1,0 +1,8 @@
+
+com: 
+   sk: 
+      id: 2001
+  
+spring: 
+    config: 
+         import: myfilePro.properties	  

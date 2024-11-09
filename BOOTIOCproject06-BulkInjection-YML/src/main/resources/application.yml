@@ -1,0 +1,24 @@
+
+com:
+  sk: 
+      id: 1001
+      cname: Lenovo
+      branch: hyd
+      pincode: 2000203 	   	   
+      size: 100
+      phoneno: 3434565432
+      addr: 
+         - hyd
+         - delhi
+         - pune
+      pincodes:   
+       - 200393
+       - 345674
+       - 357885
+      cnames: dell,apple,Lenovo 
+  
+spring: 
+     config: 
+          import: myfileyml.yml
+     application: 
+         name: BOOTIOCproject06-BulkInjection-YML
