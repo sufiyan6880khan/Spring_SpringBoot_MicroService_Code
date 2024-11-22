@@ -5,6 +5,7 @@ import java.util.Set;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -38,7 +39,7 @@ public class User {
 	@Column(length = 30)
     private String uaddr;
 	
-	@OneToMany(targetEntity = PhoneNumber.class,cascade = CascadeType.ALL , mappedBy = "user" )
+	@OneToMany(targetEntity = PhoneNumber.class,  fetch = FetchType.EAGER,cascade = CascadeType.ALL , mappedBy = "user" )
 
 	private Set<PhoneNumber> phoneInfo;
 	

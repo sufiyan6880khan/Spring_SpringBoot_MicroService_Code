@@ -1,6 +1,7 @@
 package com.sk.service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,5 +107,91 @@ public class UserMgntServiceImpl implements IUserMgntService {
 		});
 		
 	}
+	
+	//===============================================================
+
+	@Override
+	public void deleteDataUsingParent() {
+     Optional<User> opt = userRepo.findById(1001);
+     if (opt.isPresent()) {
+		    userRepo.delete(opt.get());
+    	 System.out.println("User and his Phone Number is deleted  ");
+    	 
+	} else {
+         System.out.println(" User not found.....");
+        	}	
+	}
+	
+	// =============================================================
+	
+	@Override
+	public void deleteUserPhoneNumberOnly() {
+		   Optional<User> opt = userRepo.findById(1031);
+		     if (opt.isPresent()) 
+		     {
+		    	Set<PhoneNumber> phone = opt.get().getPhoneInfo();
+		    	phone.forEach(ph->{
+		    		ph.setUser(null);
+		    	});
+		    	phonerepo.deleteAllInBatch(phone);
+		    	System.out.println(" User phone Number is deleted ");
+		    	
+		     }   else {
+		    		System.out.println(" User phone Number is not found ");
+			    	
+		     }
+		
+	}
+	
+	// ============================================================================================
+
+	@Override
+	public void addingNewChildToAParentById() {
+      
+		  Optional<User> opt = userRepo.findById(1021);
+		     if (opt.isPresent()) 
+		     {
+		    	
+		    	 User user =  opt.get();
+		    	 // get Child of Parent 
+		    	 Set<PhoneNumber> childs = opt.get().getPhoneInfo();
+		    	 // create new object for child 
+		    	 PhoneNumber ph = new PhoneNumber(8787878787L, "vi", "persinal");
+		    	 
+		    	 // link child to parent 
+		    	 ph.setUser(user);
+		    	 childs.add(ph);
+		    	 
+		    	userRepo.save(user);
+		    	System.out.println(" New child is added to the Existing child of a Parent ");
+		    	 
+		     }else {
+				System.out.println(" Persion not found ");
+			}
+	}
+	
+	// ============================================================================================
+	
+	@Override
+	public void deleteDataUsingChild() {
+
+		  Optional<User> opt = userRepo.findById(1021);
+		     if (opt.isPresent()) 
+		     {
+		        User user =  opt.get();
+		       
+		        Set<PhoneNumber> childs = opt.get().getPhoneInfo();
+		        childs.forEach(ph ->{
+		        	phonerepo.delete(ph);
+		        });
+		        System.out.println(" User and his Phone Number is deleted Using Child ");
+		    	 
+		     }else {
+				System.out.println(" User not found ");
+			}
+		        
+		     
+	}
+	
 
 } // end of class
